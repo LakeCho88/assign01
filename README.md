@@ -29,6 +29,12 @@ Then visit `http://localhost:8000`.
 확인합니다. 나누어 떨어지면 해당 수를 소인수 목록에 추가하고, 더 이상 나누어
 떨어지지 않으면 다음 수를 확인한 뒤 결과를 화면에 출력합니다.
 
+## Programming concepts
+
+- **함수**: `factorize(number)`로 소인수 분해 과정을 하나의 작업으로 묶었습니다.
+- **조건문**: `if`와 `else`로 나누어 떨어지는 경우와 다음 약수를 확인하는 경우를 구분했습니다.
+- **반복문**: `while`로 입력한 숫자가 1이 될 때까지 소인수를 차례로 확인했습니다.
+
 ## Deploy with Cloudflare Pages
 
 The app needs no framework preset, dependencies, or build command.
