@@ -11,18 +11,6 @@ my-app/
 └── README.md    # 실행 및 배포 안내
 ```
 
-## Run locally
-
-This is a plain static site. Open `index.html` in any modern browser to view it.
-
-For a local server (useful if the project grows later), from the project folder run:
-
-```powershell
-python -m http.server 8000
-```
-
-Then visit `http://localhost:8000`.
-
 ## How it works
 
 `factorize(number)` 함수가 가장 작은 수부터 반복하면서 나머지가 0인지 조건문으로
