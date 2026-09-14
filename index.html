@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="함수와 반복문으로 숫자의 모든 약수를 찾는 아주 간단한 앱." />
-    <title>약수 찾기 연습</title>
+    <meta name="description" content="함수, 조건문, 반복문으로 숫자를 소인수 분해하는 아주 간단한 앱." />
+    <title>소인수 분해</title>
 
     <style>
       :root {
@@ -76,11 +76,13 @@
       }
 
       button {
+        width: 5.5rem;
         padding: 0.75rem 1.25rem;
         background: var(--navy);
         color: #ffffff;
         cursor: pointer;
         font-weight: 700;
+        line-height: 1.35;
       }
 
       button:hover { background: var(--maroon); }
@@ -99,33 +101,45 @@
         color: #657181;
         font: 0.875rem Arial, sans-serif;
       }
+
+      .repository-link {
+        display: inline-block;
+        margin-top: 2rem;
+        color: var(--navy);
+        font: 0.875rem Arial, sans-serif;
+      }
     </style>
   </head>
   <body>
     <main>
-      <h1>약수 찾기 연습</h1>
-      <p class="subtitle">숫자를 입력하면 함수와 반복문으로 모든 약수를 찾아줍니다.</p>
-      <form id="divisor-form">
-        <label for="number-input">약수를 찾을 숫자</label>
-        <input id="number-input" type="number" min="1" step="1" placeholder="예: 24" required />
-        <button type="submit">약수 찾기</button>
+      <h1>소인수 분해</h1>
+      <p class="subtitle">숫자를 입력하면 함수, 조건문, 반복문으로 소인수 분해를 해줍니다.</p>
+      <form id="factor-form">
+        <label for="number-input">소인수 분해할 숫자</label>
+        <input id="number-input" type="number" min="2" step="1" placeholder="예: 60" required />
+        <button type="submit">소인수<br />분해</button>
       </form>
       <p id="result" aria-live="polite">숫자를 입력하고 버튼을 눌러 보세요.</p>
-      <p class="hint">1 이상의 정수만 입력할 수 있어요.</p>
+      <p class="hint">2 이상의 정수만 입력할 수 있어요.</p>
+      <a class="repository-link" href="https://github.com/LakeCho88/assign01" target="_blank" rel="noopener noreferrer">GitHub에서 코드 확인하기</a>
     </main>
 
     <script>
-      // 입력한 수를 나누어 떨어지게 하는 값을 반복해서 찾습니다.
-      function findDivisors(number) {
-        const divisors = [];
+      // 가장 작은 소인수부터 차례로 나누어 소인수 목록을 만듭니다.
+      function factorize(number) {
+        const factors = [];
+        let divisor = 2;
 
-        for (let divisor = 1; divisor <= number; divisor += 1) {
+        while (number > 1) {
           if (number % divisor === 0) {
-            divisors.push(divisor);
+            factors.push(divisor);
+            number /= divisor;
+          } else {
+            divisor += 1;
           }
         }
 
-        return divisors;
+        return factors;
       }
 
       function showResult(event) {
@@ -134,15 +148,15 @@
         const result = document.querySelector("#result");
         const number = Number(input.value);
 
-        if (!Number.isInteger(number) || number < 1) {
-          result.textContent = "1 이상의 정수를 입력해 주세요.";
+        if (!Number.isInteger(number) || number < 2) {
+          result.textContent = "2 이상의 정수를 입력해 주세요.";
         } else {
-          const divisors = findDivisors(number);
-          result.textContent = number + "의 약수: " + divisors.join(", ");
+          const factors = factorize(number);
+          result.textContent = number + " = " + factors.join(" x ");
         }
       }
 
-      document.querySelector("#divisor-form").addEventListener("submit", showResult);
+      document.querySelector("#factor-form").addEventListener("submit", showResult);
     </script>
   </body>
 </html>
